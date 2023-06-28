@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <button onclick="ClickDeviceSensorRequest()">加速度センサーを許可</button>
     <script>
         function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
@@ -32,6 +31,7 @@
         function init() {
             if (window.DeviceOrientationEvent) {
                 if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    let button = '<button id="sensorrequest" onclick=ClickDeviceSensorRequest()>加速度センサーを有効化</button>';
                 }
             }else {
                 window.addEventListener("deviceorientation", deviceOrientation);
