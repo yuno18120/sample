@@ -32,6 +32,7 @@
             if (window.DeviceOrientationEvent) {
                 if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
                     let button = '<button id="sensorrequest" onclick=ClickDeviceSensorRequest()>加速度センサーを有効化</button>';
+                    $('body').prepend(button);
                 }
             }else {
                 window.addEventListener("deviceorientation", deviceOrientation);
