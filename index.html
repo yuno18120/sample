@@ -24,6 +24,26 @@
                 }
             })
         }
+
+        $(function () {
+            init();
+        });
+
+        function init() {
+            if (window.DeviceOrientationEvent) {
+                if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                }
+            }else {
+                window.addEventListener("deviceorientation", deviceOrientation);
+            }
+
+            if(window.DeviceMotionEvent){
+                if(DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission == 'funciton'){
+                }
+            }else{
+                window.addEventListener("devicemotion",deviceMotion);
+            }
+        }
     </script>
 </body>
 
