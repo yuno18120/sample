@@ -9,40 +9,32 @@
 </head>
 
 <body>
+    <button onclick="ClickDeviceSensorRequest()"></button>
     <script>
+        let permission = false;
+        let button = document.getElementById("button");
         function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("deviceorientation", deviceOrientation);
+                    permission = true;
                 }
             });
 
             DeviceMotionEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("devicemotion", deviceMotion);
+                    permission = true;
                 }
             })
         }
-
         $(function () {
             init();
         });
 
-        function init() {
-            if (window.DeviceOrientationEvent) {
-                if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    let button = '<button onclick="ClickDeviceSensorRequest()">加速度センサーを有効化</button>';
-                    $('body').prepend(button);
-                }
-            }else {
-                window.addEventListener("deviceorientation", deviceOrientation);
-            }
-
-            if(window.DeviceMotionEvent){
-                if(DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission == 'funciton'){
-                }
-            }else{
-                window.addEventListener("devicemotion",deviceMotion);
+        function init(){
+            if(permission){
+                button.remove();
             }
         }
     </script>
