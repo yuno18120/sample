@@ -11,31 +11,20 @@
 <body>
     <button id="button" onclick="ClickDeviceSensorRequest()">モーションセンサーの許可</button>
     <script>
-        let permission = false;
-        let button = document.getElementById("button");
         function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("deviceorientation", deviceOrientation);
-                    permission = true;
+                    document.getElementById("button").remove();
                 }
             });
 
             DeviceMotionEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("devicemotion", deviceMotion);
-                    permission = true;
+                    document.getElementById("button").remove();
                 }
             })
-        }
-        $(function () {
-            init();
-        });
-
-        function init(){
-            if(permission){
-                button.remove();
-            }
         }
         setInterval(init,100);
     </script>
