@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <button id="button" onclick="ClickDeviceSensorRequest()">モーションセンサーの許可</button>
     <h1 id="t1">こんにちは</h1>
@@ -15,19 +16,36 @@
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("deviceorientation", deviceOrientation);
-                    document.getElementById("button").remove();
-                    document.getElementById("t1").innerText="おはよう";
                 }
             });
 
             DeviceMotionEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("devicemotion", deviceMotion);
-                    document.getElementById("button").remove();
                 }
             })
         }
-        setInterval(init,100);
+
+        $(function () {
+            init();
+        });
+
+        function init() {
+            if (window.DeviceOrientationEvent) {
+                if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    document.getElementById("t1").innerText = "ohayou";
+                } else {
+                    window.addEventListener("deviceorientation", deviceOrientation);
+                }
+            }
+            if (window.DeviceMotionEvent) {
+                if (DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function') {
+                    document.getElementById("t1").innerText = "ohayou";
+                } else {
+                    window.addEventListener("devicemotion", deviceMotion);
+                }
+            }
+        }
     </script>
 </body>
 
