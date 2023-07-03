@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <button onclick="ClickDeviceSensorRequest()"></button>
+    <button onclick="ClickDeviceSensorRequest()">モーションセンサーの許可</button>
     <script>
         let permission = false;
         let button = document.getElementById("button");
@@ -37,6 +37,7 @@
                 button.remove();
             }
         }
+        setInterval(init,100);
     </script>
 </body>
 
