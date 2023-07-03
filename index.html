@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <button id="button" onclick="ClickDeviceSensorRequest()">モーションセンサーの許可</button>
+    <h1 id="t1">こんにちは</h1>
     <script>
         function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("deviceorientation", deviceOrientation);
                     document.getElementById("button").remove();
+                    document.getElementById("t1").innerText="おはよう";
                 }
             });
 
