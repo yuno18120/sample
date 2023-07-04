@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <canvas width="350" height="350" id="mycanvas"></canvas>
+    <canvas width="380" height="380" id="mycanvas"></canvas>
     <script>
 
         let canvas = document.querySelector('canvas');
@@ -69,15 +69,10 @@
         }*/
 
         canvas.addEventListener("touchstart",touchStart);
-        canvas.addEventListener("touchend",touchEnd);
 
         function touchStart() {
             isTouch = true;
         }
-        function touchEnd() {
-            isTouch = false;
-        }
-
 
         function run() {
             if(isTouch){
@@ -86,8 +81,6 @@
                 c.fillStyle="white";
                 c.fill();
                 c.closePath();
-
-                console.log("run");
             }
         }
 
