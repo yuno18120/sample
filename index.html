@@ -12,12 +12,12 @@
     <canvas width="150" height="150" id="mycanvas"></canvas>
     <script>
 
-        let canvas = document.getElementById("mycanvas");
+        let canvas = document.querySelector("#canvas");
         let c = canvas.getContext('2d');
 
-        context.beginPath();
-        context.fillStyle = 'rgb( 0, 0, 0)';
-        context.fillRect(0, 0, canvas.width, canvas.height);
+        c.beginPath();
+        c.fillStyle = 'rgb( 0, 0, 0)';
+        c.fillRect(0, 0, canvas.width, canvas.height);
 
         let isTouch;
         let Data = [];
@@ -68,11 +68,11 @@
         }
 
         if (isTouch) {
-            context.beginPath();
-            context.arc(50, 60, 40, 0, Math.PI * 2, true);
-            context.strokeStyle = 'deepskyblue';
-            context.lineWidth = 5;
-            context.stroke();
+            c.beginPath();
+            c.arc(50, 60, 40, 0, Math.PI * 2, true);
+            c.strokeStyle = 'deepskyblue';
+            c.lineWidth = 5;
+            c.stroke();
         }
 
         function deviceOrientation(e) {
