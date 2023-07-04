@@ -1,47 +1,23 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>加速度センサー</title>
-
-    <style type="text/css">
-        html,
-        body {
-            text-align: center;
-            background-color: #fafafa;
-            font-size: 20px;
-            color: #333;
-        }
-
-        body {
-            background-color: #ffffcc;
-        }
-
-        #mycanvas {
-            border: 1px solid #333;
-            background-color: #ffcccc;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-
-    <div class="container">
-        <canvas id="mychart1" style="position:relative; width:90%; height: 30%;"></canvas>
-        <canvas id="mychart2" style="position:relative; width:90%; height: 30%;"></canvas>
-
-        <div id="cdiv">
-            <canvas width="80%" height="30%" id="mycanvas"></canvas>
-        </div>
-    </div>
-
+    <canvas width="80%" height="30%" id="mycanvas"></canvas>
     <script>
-        var isTouch = false;
-        var motionData = [];
-        var orientationData = [];
 
-        function ClickRequestDeviceSensor() {
+        let canvas = document.getElementById("mycanvas");
+        let c = canvas.getContext('2d');
+
+        let isTouch;
+        let Data = [];
+        function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
                     window.addEventListener("deviceorientation", deviceOrientation);
@@ -61,15 +37,8 @@
 
         function init() {
             var canvas = document.getElementById('mycanvas');
-            if (!canvas || !canvas.getContext) {
-                return false;
-            }
-
             if (window.DeviceOrientationEvent) {
                 if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    $('#cdiv').css('display', 'none');
-                    var banner = '<div id="sensorrequest" onclick="ClickRequestDeviceSensor();" style="z-index:1; position:absolute; width:100%; background-color:#000; color:#fff;><p style="padding:10px;">センサーの有効化</p></div>';
-                    $('body').prepend(banner);
                 } else {
                     window.addEventListener("deviceorientation", deviceOrientation);
                 }
@@ -85,107 +54,36 @@
                 canvas.addEventListener("touchstart", touchStart);
                 canvas.addEventListener("touchend", touchEnd);
             }
-
-            //. リサイズ時に Canvas サイズを変更する
-            $(window).on('load resize', function () {
-                resized();
-            });
-            resized();
-
-            //. スクロール禁止
-            /*
-            $(window).on('touchmove.noScroll', function( e ){
-              e.preventDefault();
-            });
-            */
-            var movefun = function (event) {
-                event.preventDefault();
-            }
-            window.addEventListener('touchmove', movefun, { passive: false });
         }
 
-        var canvas_width = 0;
-        var canvas_height = 0;
-        function resized() {
-            var browserWidth = window.innerWidth;
-            var browserHeight = window.innerHeight;
-            var canvas = document.getElementById('mycanvas');
-            if (canvas && canvas.getContext) {
-                canvas.width = canvas_width = browserWidth * 0.8;
-                canvas.height = canvas_height = browserHeight * 0.4;
-            }
-        }
-
-        function touchStart(e) {
-            e.preventDefault();
+        function touchStart() {
             isTouch = true;
-            motionData = [];
-            orientationData = [];
+        }
+        function touchEnd() {
+            isTouch = false;
         }
 
-        function touchEnd(e) {
-            e.preventDefault();
-            isTouch = false;
+        if (isTouch) {
+            context.beginPath();
+            context.arc(50, 60, 40, 0, Math.PI * 2, true);
+            context.strokeStyle = 'deepskyblue';
+            context.lineWidth = 5;
+            context.stroke();
+        }
 
-            if (motionData && motionData.length > 0) {
-                //. グラフ描画
-                var labels = [];
-                var x_data = [];
-                var y_data = [];
-                var z_data = [];
-                for (var i = 0; i < motionData.length; i++) {
-                    var mot = motionData[i];
-                    labels.push('' + i);
-                    x_data.push(mot['ac'].x);
-                    y_data.push(mot['ac'].y);
-                    z_data.push(mot['ac'].z);
-                }
-            }
-
-            if (orientationData && orientationData.length > 0) {
-                //. グラフ描画
-                var labels = [];
-                var fb_data = [];
-                var lr_data = [];
-                var dir_data = [];
-                for (var i = 0; i < orientationData.length; i++) {
-                    var ori = orientationData[i];
-                    labels.push('' + i);
-                    fb_data.push(ori['fb']);
-                    lr_data.push(ori['lr']);
-                    dir_data.push(ori['dir']);
-                }
+        function deviceOrientation(e) {
+            if (isTouch) {
+                let gamma = e.gamma;
+                let beta = e.beta;
+                let alpha = e.alpha;
             }
         }
 
         function deviceMotion(e) {
-            e.preventDefault();
             if (isTouch) {
-                var ac = e.acceleration;
-                var acg = e.accelerationIncludingGravity;
-                var rot = e.rotationRate;
-
-                var motion = {};
-                motion['ac'] = ac;
-                motion['acg'] = acg;
-                motion['rot'] = rot;
-
-                motionData.push(motion);
-            }
-        }
-        function deviceOrientation(e) {
-            e.preventDefault();
-            if (isTouch) {
-                var gamma = e.gamma; //. Left/Right
-                var beta = e.beta;   //. Front/Back
-                var alpha = e.alpha; //. Direction
-
-                var ori = {};
-                ori['dir'] = alpha;
-                ori['fb'] = beta;
-                ori['lr'] = gamma;
-
-                orientationData.push(ori);
+                let ac = e.acceleration
+                let acg = e.accelerationIncludingGravity;
+                let rot = rotationRate;
             }
         }
     </script>
