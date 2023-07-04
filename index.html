@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <canvas width="300" height="300" id="mycanvas"></canvas>
+    <canvas width="350" height="350" id="mycanvas"></canvas>
     <script>
 
         let canvas = document.querySelector('canvas');
@@ -50,12 +50,12 @@
                     window.addEventListener("devicemotion", deviceMotion);
                 }
             }
-
-            if (window.TouchEvent) {
-                canvas.addEventListener("touchstart", touchStart);
-                canvas.addEventListener("touchend", touchEnd);
-            }
         }
+
+        canvas.addEventListener("touchstart",touchStart);
+        canvas.addEventListener("touchend",touchEnd);
+        canvas.addEventListener("mousedown",mousedown);
+        canvas.addEventListener("mouseup",mouseup);
 
         function touchStart() {
             isTouch = true;
