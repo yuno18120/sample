@@ -67,13 +67,11 @@
             isTouch = false;
         }
 
-        if (isTouch) {
             c.beginPath();
             c.arc(50, 60, 40, 0, Math.PI * 2, true);
             c.strokeStyle = 'deepskyblue';
             c.lineWidth = 5;
             c.stroke();
-        }
 
         function deviceOrientation(e) {
             if (isTouch) {
