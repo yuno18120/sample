@@ -76,22 +76,6 @@ body{
                 return false;
             }
 
-            if (window.DeviceOrientationEvent) {
-                if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    $('#cdiv').css('display', 'none');
-                    var banner = '<div id="sensorrequest" onclick="ClickRequestDeviceSensor();" style="z-index:1; position:absolute; width:100%; background-color:#000; color:#fff;><p style="padding:10px;">センサーの有効化</p></div>';
-                    $('body').prepend(banner);
-                } else {
-                    window.addEventListener("deviceorientation", deviceOrientation);
-                }
-            }
-            if (window.DeviceMotionEvent) {
-                if (DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function') {
-                } else {
-                    window.addEventListener("devicemotion", deviceMotion);
-                }
-            }
-
             if (window.TouchEvent) {
                 canvas.addEventListener("touchstart", touchStart);
                 canvas.addEventListener("touchend", touchEnd);
