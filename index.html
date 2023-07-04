@@ -21,7 +21,7 @@
         c.closePath();
 
         let isTouch;
-        let Data = [];
+       /* let Data = [];
         function ClickDeviceSensorRequest() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
                 if (response === 'granted') {
@@ -52,18 +52,6 @@
             }
         }
 
-        canvas.addEventListener("touchstart",touchStart);
-        canvas.addEventListener("touchend",touchEnd);
-        canvas.addEventListener("mousedown",mousedown);
-        canvas.addEventListener("mouseup",mouseup);
-
-        function touchStart() {
-            isTouch = true;
-        }
-        function touchEnd() {
-            isTouch = false;
-        }
-
         function deviceOrientation(e) {
             if (isTouch) {
                 let gamma = e.gamma;
@@ -78,7 +66,18 @@
                 let acg = e.accelerationIncludingGravity;
                 let rot = rotationRate;
             }
+        }*/
+
+        canvas.addEventListener("touchstart",touchStart);
+        canvas.addEventListener("touchend",touchEnd);
+
+        function touchStart() {
+            isTouch = true;
         }
+        function touchEnd() {
+            isTouch = false;
+        }
+
 
         function run() {
             if(isTouch){
