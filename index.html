@@ -33,18 +33,30 @@
         function init() {
             if (window.DeviceOrientationEvent) {
                 if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    document.getElementById("t1").innerText = "ohayou";
+                    var banner = '<div id="sensorrequest" onclick="ClickRequestDeviceSensor();" style="z-index:1; position:absolute; width:100%; background-color:#000; color:#fff;><p style="padding:10px;">センサーの有効化</p></div>';
+                    $('body').prepend(banner);
                 } else {
                     window.addEventListener("deviceorientation", deviceOrientation);
                 }
             }
             if (window.DeviceMotionEvent) {
                 if (DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function') {
-                    document.getElementById("t1").innerText = "ohayou";
                 } else {
                     window.addEventListener("devicemotion", deviceMotion);
                 }
             }
+        }
+
+        function deviceOrientation(e) {
+            let gamma = e.gamma;
+            let beta = e.beta;
+            let alpha = e.alpha;
+        }
+
+        function deviceMotion(e) {
+            let ac = e.acceleration
+            let acg = e.accelerationIncludingGravity;
+            let rot = rotationRate;
         }
     </script>
 </body>
