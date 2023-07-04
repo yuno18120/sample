@@ -9,11 +9,15 @@
 </head>
 
 <body>
-    <canvas width="150" height="150" id="mycanvas" background-color="black"></canvas>
+    <canvas width="150" height="150" id="mycanvas"></canvas>
     <script>
 
         let canvas = document.getElementById("mycanvas");
         let c = canvas.getContext('2d');
+
+        context.beginPath();
+        context.fillStyle = 'rgb( 0, 0, 0)';
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
         let isTouch;
         let Data = [];
