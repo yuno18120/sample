@@ -53,10 +53,8 @@
         function touchStart() {
             if (!isTouch) {
                 isTouch = true;
-                run();
             } else {
                 isTouch = false;
-                run();
             }
         }
 
@@ -68,15 +66,12 @@
                 c.fill();
                 c.closePath();
             }
-        }
-
-        function background() {
             c.beginPath();
             c.fillStyle = 'rgb( 0, 0, 0)';
             c.fillRect(0, 0, canvas.width, canvas.height);
             c.closePath();
         }
-        setInterval(background,100);
+        setInterval(run, 10);
     </script>
 </body>
 
