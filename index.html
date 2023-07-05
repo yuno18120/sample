@@ -18,6 +18,13 @@
         let x = 10, y = 10;
 
         let isTouch;
+
+        c.beginPath();
+        c.rect(0, 0, canvas.width, canvas.height);
+        c.fillStyle = "black";
+        c.fill();
+        c.closePath();
+        
         /*
         function ClickRequestDeviceSensor() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
@@ -43,9 +50,19 @@
         }*/
 
         canvas.addEventListener("touchstart", touchStart);
+        canvas.addEventListener("touchend", touchEnd);
 
         function touchStart() {
             isTouch = true;
+            run();
+        }
+        function touchEnd() {
+            isTouch = false;
+            c.beginPath();
+            c.rect(0, 0, canvas.width, canvas.height);
+            c.fillStyle = "black";
+            c.fill();
+            c.closePath();
         }
 
         function run() {
@@ -56,12 +73,6 @@
                 c.fill();
                 c.closePath();
             }
-
-            c.beginPath();
-            c.rect(0,0,canvas.width,canvas.height);
-            c.fillStyle="black";
-            c.fill();
-            c.closePath();
         }
 
         /*function deviceOrientation(e) {
@@ -82,8 +93,6 @@
                 let rot = rotationRate;
             }
         }*/
-
-        setInterval(run, 10);
     </script>
 </body>
 
