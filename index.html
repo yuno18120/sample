@@ -24,7 +24,7 @@
         c.fillStyle = "black";
         c.fill();
         c.closePath();
-        
+
         /*
         function ClickRequestDeviceSensor() {
             DeviceOrientationEvent.requestPermission().then(function (response) {
@@ -50,26 +50,20 @@
         }*/
 
         canvas.addEventListener("touchstart", touchStart);
-        canvas.addEventListener("touchend", touchEnd);
 
         function touchStart() {
-            isTouch = true;
-            run();
-        }
-        function touchEnd() {
-            isTouch = false;
-            c.beginPath();
-            c.rect(0, 0, canvas.width, canvas.height);
-            c.fillStyle = "black";
-            c.fill();
-            c.closePath();
-        }
-
-        function run() {
-            if (isTouch) {
+            if (!isTouch) {
+                isTouch = true;
                 c.beginPath();
                 c.rect(x, y, 10, 10);
                 c.fillStyle = "white";
+                c.fill();
+                c.closePath();
+            } else {
+                isTouch = false;
+                c.beginPath();
+                c.rect(0, 0, canvas.width, canvas.height);
+                c.fillStyle = "black";
                 c.fill();
                 c.closePath();
             }
