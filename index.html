@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <button onclick="ClickRequestDeviceSensor()">許可</button>
+    <button>許可</button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
 
         let canvas = document.querySelector('canvas');
         let c = canvas.getContext('2d');
-        let x = 10, y = 10;
+        let rx = 10, ry = 10;
 
         let isTouch;
 
@@ -25,36 +25,25 @@
         c.fill();
         c.closePath();
 
-        function ClickRequestDeviceSensor() {
-            DeviceOrientationEvent.requestPermission().then(function (response) {
-                if (response === 'granted') {
-                    window.addEventListener("deviceorientation", deviceOrientation);
-                }
-            });
-
-            DeviceMotionEvent.requestPermission().then(function (response) {
-                if (response === 'granted') {
-                    window.addEventListener("devicemotion", deviceMotion);
-                }
-            });
+        if(window.DeviceOrientationEvent){
+            if(DeviceOrientationEvent.requestPermisson){
+                $(".btn").on("click",function(){
+                    DeviceOrientationEvent.requestPermisson().then(function(responce){
+                        if(responce === 'granted'){
+                            $(window).on("devicemotion",deviceOrientation);
+                        }
+                    })
+                })
+            }
+        }else{
+            $(window).on("devicemotion",deviceOrientation);
         }
-
-        if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        } else {
-            window.addEventListener("deviceorientation", deviceOrientation);
-        }
-        if (DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function') {
-        } else {
-            window.addEventListener("devicemotion", deviceMotion);
-        }
-
-        canvas.addEventListener("touchstart", touchStart);
 
         function touchStart() {
             if (!isTouch) {
                 isTouch = true;
                 c.beginPath();
-                c.rect(x, y, 10, 10);
+                c.rect(rx, ry, 10, 10);
                 c.fillStyle = "white";
                 c.fill();
                 c.closePath();
@@ -70,20 +59,12 @@
 
         function deviceOrientation(e) {
             if (isTouch) {
-                let gamma = e.gamma;
-                let beta = e.beta;
-                let alpha = e.alpha;
+                let x = 10*event.accelerationIncludingGravity.x;
+                let y = 10*event.accelerationIncludingGravity.y;
+                let z = 10*event.accelerationIncludingGravity.z;
 
-                x += gamma1*10;
-                y += beta*10;
-            }
-        }
-
-        function deviceMotion(e) {
-            if (isTouch) {
-                let ac = e.acceleration
-                let acg = e.accelerationIncludingGravity;
-                let rot = rotationRate;
+                rx += x;
+                ry += y;
             }
         }
     </script>
