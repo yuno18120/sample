@@ -15,6 +15,7 @@
 
         let canvas = document.querySelector('canvas');
         let c = canvas.getContext('2d');
+        let x = 10, y = 10;
 
         let isTouch;
 
@@ -29,7 +30,16 @@
                 if (response === 'granted') {
                     window.addEventListener("devicemotion", deviceMotion);
                 }
-            })
+            });
+        }
+
+        if (DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        } else {
+            window.addEventListener("deviceorientation", deviceOrientation);
+        }
+        if (DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function') {
+        } else {
+            window.addEventListener("devicemotion", deviceMotion);
         }
 
         function deviceOrientation(e) {
@@ -37,6 +47,9 @@
                 let gamma = e.gamma;
                 let beta = e.beta;
                 let alpha = e.alpha;
+
+                x += gamma / 10;
+                y += beta / 10;
             }
         }
 
@@ -49,28 +62,25 @@
         }
 
         canvas.addEventListener("touchstart", touchStart);
+        canvas.addEventListener("touchend", touchEnd);
 
         function touchStart() {
-            if (!isTouch) {
-                isTouch = true;
-            } else {
-                isTouch = false;
-            }
+            isTouch = true;
+        }
+        function touchEnd() {
+            isTouch = false;
         }
 
         function run() {
             if (isTouch) {
                 c.beginPath();
-                c.arc(50, 60, 40, 0, Math.PI * 2, true);
+                c.rect(x, y, 10, 10);
                 c.fillStyle = "white";
                 c.fill();
                 c.closePath();
             }
-            c.beginPath();
-            c.fillStyle = 'rgb( 0, 0, 0)';
-            c.fillRect(0, 0, canvas.width, canvas.height);
-            c.closePath();
         }
+
         setInterval(run, 10);
     </script>
 </body>
