@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <button>許可</button>
+    <button onclick="ClickRequestDeviceSensor()">許可</button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
 
@@ -27,17 +27,17 @@
 
         if(window.DeviceOrientationEvent){
             if(DeviceOrientationEvent.requestPermisson){
-                    DeviceOrientationEvent.requestPermisson().then(function(responce){
-                        if(responce === 'granted'){
-                            window.addEventListener("devicemotion",deviceOrientation);
-                        }
-                    })
+                DeviceOrientationEvent.requestPermisson().then(function(responce){
+                    if(responce == 'granted'){
+                        window.addEventListener("devicemotion",deviceOrientation);
+                    }
+                })
             }
         }else{
             window.addEventListener("devicemotion",deviceOrientation);
         }
 
-        c.addEventListener("touchstart",touchStart);
+        canvas.addEventListener("touchstart", touchStart);
 
         function touchStart() {
             if (!isTouch) {
@@ -59,9 +59,8 @@
 
         function deviceOrientation(e) {
             if (isTouch) {
-                let x = 10*event.accelerationIncludingGravity.x;
-                let y = 10*event.accelerationIncludingGravity.y;
-                let z = 10*event.accelerationIncludingGravity.z;
+                let x = 100*e.accelerationIncludingGravity.x;
+                let y = 100*e.accelerationIncludingGravity.y;
 
                 rx += x;
                 ry += y;
