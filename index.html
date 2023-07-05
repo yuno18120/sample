@@ -79,6 +79,12 @@
                 c.fill();
                 c.closePath();
             }
+
+            c.beginPath();
+            c.rect(0,0,canvas.width,canvas.height);
+            c.fillStyle="black";
+            c.fill();
+            c.closePath();
         }
 
         setInterval(run, 10);
