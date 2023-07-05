@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <button onclick="ClickRequestDeviceSensor()">許可</button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
 
@@ -42,11 +41,6 @@
         function touchStart() {
             if (!isTouch) {
                 isTouch = true;
-                c.beginPath();
-                c.rect(rx, ry, 10, 10);
-                c.fillStyle = "white";
-                c.fill();
-                c.closePath();
             } else {
                 isTouch = false;
                 c.beginPath();
@@ -59,13 +53,25 @@
 
         function deviceOrientation(e) {
             if (isTouch) {
-                let x = 100*e.accelerationIncludingGravity.x;
-                let y = 100*e.accelerationIncludingGravity.y;
+                let x = 100 * e.accelerationIncludingGravity.x;
+                let y = 100 * e.accelerationIncludingGravity.y;
 
                 rx += x;
                 ry += y;
             }
         }
+
+        function run() {
+            if(isTouch){
+                c.beginPath();
+                c.rect(rx, ry, 10, 10);
+                c.fillStyle = "white";
+                c.fill();
+                c.closePath();
+            }
+        }
+
+        setInterval(run,10);
     </script>
 </body>
 
