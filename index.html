@@ -16,11 +16,6 @@
         let canvas = document.querySelector('canvas');
         let c = canvas.getContext('2d');
 
-        c.beginPath();
-        c.fillStyle = 'rgb( 0, 0, 0)';
-        c.fillRect(0, 0, canvas.width, canvas.height);
-        c.closePath();
-
         let isTouch;
 
         function ClickRequestDeviceSensor() {
@@ -74,6 +69,14 @@
                 c.closePath();
             }
         }
+
+        function background() {
+            c.beginPath();
+            c.fillStyle = 'rgb( 0, 0, 0)';
+            c.fillRect(0, 0, canvas.width, canvas.height);
+            c.closePath();
+        }
+        setInterval(background,100);
     </script>
 </body>
 
