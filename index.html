@@ -10,6 +10,7 @@
 
 <body>
     <h1 id="t1"></h1>
+    <h1 id="t2"></h1>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
         window.addEventListener("devicemotion",deviceMotion);
@@ -22,6 +23,7 @@
 
         function run(){
             document.getElementById("t1").innerText=x;
+            document.getElementById("t2"),innerText=window.DeviceOrientationEvent;
         }
 
         setInterval(run,100);
