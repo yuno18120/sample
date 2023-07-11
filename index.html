@@ -26,9 +26,7 @@
 
         function run() {
             if(window.DeviceMotionEvent){
-                if(DeviceMotionEvent.requestPermisson){
-                    bool = true;
-                }
+                bool = true;
             }
             document.getElementById("t1").innerText = x;
             document.getElementById("t2").innerText = bool;
