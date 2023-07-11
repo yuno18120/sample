@@ -20,16 +20,17 @@
         let x = 0;
         let bool = false;
 
-        function deviceMotion(e) {
-            x = e.acceleration.x;
-        }
-
         function run() {
             if(window.DeviceMotionEvent){
                 bool = true;
+                window.addEventListener("devicemotion",deviceMotion);
             }
             document.getElementById("t1").innerText = x;
             document.getElementById("t2").innerText = bool;
+        }
+
+        function deviceMotion(e) {
+            x = e.acceleration.x;
         }
 
         setInterval(run, 100);
