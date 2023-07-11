@@ -11,22 +11,31 @@
 <body>
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
+    <h1 id="t3"></h1>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
-        window.addEventListener("devicemotion",deviceMotion);
+        window.addEventListener("devicemotion", deviceMotion);
+        let canvas = document.getElementById('mycanvas');
+        let c = canvas.getContext('2d');
 
-        let x=0;
+        let x = 0;
+        let bool = false;
 
-        function deviceMotion(e){
-            x=e.acceleration.x;
+        function deviceMotion(e) {
+            x = e.acceleration.x;
         }
 
-        function run(){
-            document.getElementById("t1").innerText=x;
-            document.getElementById("t2"),innerText=window.DeviceOrientationEvent;
+        function run() {
+            if(window.DeviceMotionEvent){
+                if(DeviceMotionEvent.requestPermisson){
+                    bool = true;
+                }
+            }
+            document.getElementById("t1").innerText = x;
+            document.getElementById("t2").innerText = bool;
         }
 
-        setInterval(run,100);
+        setInterval(run, 100);
     </script>
 </body>
 
