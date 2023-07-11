@@ -22,7 +22,6 @@
 
         function run() {
             if(window.DeviceMotionEvent){
-                bool = true;
                 window.addEventListener("devicemotion",deviceMotion);
             }
             document.getElementById("t1").innerText = x;
@@ -31,6 +30,7 @@
 
         function deviceMotion(e) {
             x = e.acceleration.x;
+            bool = true;
         }
 
         setInterval(run, 100);
