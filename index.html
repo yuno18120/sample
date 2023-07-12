@@ -22,7 +22,12 @@
 
         function run() {
             if(window.DeviceMotionEvent){
-                window.addEventListener("devicemotion",deviceMotion);
+                DeviceMotionEvent.requestPermisson().then(function(responce){
+                    if(responce == 'granted'){
+                        window.addEventListener("devicemotion",deviceMotion);
+                        bool = true;
+                    }
+                })
             }
             document.getElementById("t1").innerText = x;
             document.getElementById("t2").innerText = bool;
@@ -30,7 +35,6 @@
 
         function deviceMotion(e) {
             x = e.acceleration.x;
-            bool = true;
         }
 
         setInterval(run, 100);
