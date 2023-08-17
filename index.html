@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<html style="background-color: white" id="bcolor"></html>
+<html lang="en">
+
+</html>
+<html style="background-color: white" id="bcolor">
+
+</html>
 
 <head>
     <meta charset="UTF-8">
@@ -13,31 +17,77 @@
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
     <h1 id="t3"></h1>
+    <button id="button" onclick="click()">この位置で決定</button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
+
     <script>
+
         let canvas = document.getElementById('mycanvas');
         let c = canvas.getContext('2d');
         let color = document.getElementById("bcolor");
 
-        let x,y,z = 0;
-        let deviceX = 360;
+        let x = 0; //devicemotionのデータを格納する変数
+        let y = 0; //deviceXを決定するために使う変数
+        let count=0;
+        let second=0;
+        let deviceX = [];  //設定する角度
+        let sampleDeta = [];  //平均データ
 
-        window.addEventListener("deviceorientation",deviceMotion);
+        window.addEventListener("deviceorientation", deviceMotion);
+        canvas.addEventListener("touchstart",touchstart);
+        canvas.addEventListener("touchend",touchend);
 
         function run() {
-            document.getElementById("t1").innerText = x;
+            //デバイスの初期設定
+            if (count == 0) {
 
-            if(x < deviceX-5 && x < 5){
-                color.style.backgroundColor="rgb(255,0,0)";
+                document.getElementById("t1").innerText = "デバイスをあなたの持ちやすいようにお持ちください";
+                document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
+
+            } else if (count == 1) {
+
+                document.getElementById("t1").innerText = "デバイスを右回りに90度傾けてください";
+                document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
+
+                sampleDeta.push(x);
+
+                for (let i = 0; i < sampleDeta.length; i++) {
+                    y += sampleDeta[i];
+                    deviceX.push(y / sampleDeta.length);
+                    sampleDeta[i] = 0;
+                }
+
+            } else if (count == 2) {
+
+                document.getElementById("t1").innerText = "デバイスを元の位置に戻した後、左回りで90度傾けてください";
+                document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
+
+                sampleDeta.push(x);
+
+                for (let i = 0; u < sampleDeta.length; i++) {
+                    y += sampleDeta[i];
+                    deviceX.push(y / sampleDeta.length);
+                    sampleDeta[i] = 0;
+                }
             }else{
-                color.style.backgroundColor="rgb(255,255,255)";
+                document.getElementById("button").style.visibility="hidden";
             }
+
+            document.getElementById("t3").innerText = x;
+
+            if (x < deviceX - 5 && x < deviceX +5) {
+                color.style.backgroundColor = "rgb(255,0,0)";
+            } else {
+                color.style.backgroundColor = "rgb(255,255,255)";
+            }
+        }
+
+        function click(){
+            count++;
         }
 
         function deviceMotion(e) {
             x = e.alpha;
-            y = e.beta;
-            z = e.gamma;
         }
 
         setInterval(run, 100);
