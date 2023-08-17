@@ -17,45 +17,21 @@
         let canvas = document.getElementById('mycanvas');
         let c = canvas.getContext('2d');
 
-        let x = 0;
+        let x,y,z = 0;
         let bool = false;
 
-        window.addEventListener("devicemotion",deviceMotion);
-
-        canvas.addEventListener("mousedown", click);
-        canvas.addEventListener("mouseup", releace);
-        canvas.addEventListener("touchstart",click);
-        canvas.addEventListener("touchend",releace);
-
-        function click() {
-            bool = true;
-            /*if(window.DeviceMotionEvent){
-                DeviceMotionEvent.requestPermisson().then(function(responce){
-                    if(responce == 'granted'){
-                        window.addEventListener("devicemotion",deviceMotion);
-                        bool = true;
-                    }
-                })
-            }*/
-        }
-
-        function releace() {
-            bool = false;
-        }
+        window.addEventListener("deviceorientation",deviceMotion);
 
         function run() {
             document.getElementById("t1").innerText = x;
-            document.getElementById("t2").innerText = bool;
-
-            c.beginPath();
-            c.rect(0, 0, canvas.width, canvas.height);
-            c.fillStyle = "black";
-            c.fill();
-            c.closePath();
+            document.getElementById("t1").innerText = y;
+            document.getElementById("t1").innerText = z;
         }
 
         function deviceMotion(e) {
-            x = e.acceleration.x;
+            x = e.alpha;
+            y = e.beta;
+            z = e.gamma;
         }
 
         setInterval(run, 100);
