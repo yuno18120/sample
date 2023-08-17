@@ -12,7 +12,6 @@
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
     <h1 id="t3"></h1>
-    <button onclick="click()"></button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
     <script>
         let canvas = document.getElementById('mycanvas');
@@ -21,21 +20,38 @@
         let x = 0;
         let bool = false;
 
-        function click(){
-            alert("click");
-            if(window.DeviceMotionEvent){
+        window.addEventListener("devicemotion",deviceMotion);
+
+        canvas.addEventListener("mousedown", click);
+        canvas.addEventListener("mouseup", releace);
+        canvas.addEventListener("touchstart",click);
+        canvas.addEventListener("touchend",releace);
+
+        function click() {
+            bool = true;
+            /*if(window.DeviceMotionEvent){
                 DeviceMotionEvent.requestPermisson().then(function(responce){
                     if(responce == 'granted'){
                         window.addEventListener("devicemotion",deviceMotion);
                         bool = true;
                     }
                 })
-            }
+            }*/
+        }
+
+        function releace() {
+            bool = false;
         }
 
         function run() {
             document.getElementById("t1").innerText = x;
             document.getElementById("t2").innerText = bool;
+
+            c.beginPath();
+            c.rect(0, 0, canvas.width, canvas.height);
+            c.fillStyle = "black";
+            c.fill();
+            c.closePath();
         }
 
         function deviceMotion(e) {
