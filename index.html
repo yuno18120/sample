@@ -20,14 +20,14 @@
         let color = document.getElementById("bcolor");
 
         let x,y,z = 0;
-        let deviceX = 355;
+        let deviceX = 360;
 
         window.addEventListener("deviceorientation",deviceMotion);
 
         function run() {
             document.getElementById("t1").innerText = x;
 
-            if(x < deviceX+3 && x > deviceX-3){
+            if(x < deviceX-5 && x < 5){
                 color.style.backgroundColor="rgb(255,0,0)";
             }else{
                 color.style.backgroundColor="rgb(255,255,255)";
