@@ -17,7 +17,7 @@
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
     <h1 id="t3"></h1>
-    
+    <button id="button" onclick="click()">この位置で決定</button>
     <canvas width="375" height="375" id="mycanvas"></canvas>
 
     <script>
@@ -34,8 +34,6 @@
         let sampleDeta = [];  //平均データ
 
         window.addEventListener("deviceorientation", deviceMotion);
-        canvas.addEventListener("touchstart",touchstart);
-        canvas.addEventListener("touchend",touchend);
 
         function run() {
             //デバイスの初期設定
@@ -85,6 +83,7 @@
         function click(){
             count++;
         }
+
 
         function deviceMotion(e) {
             x = e.alpha;
