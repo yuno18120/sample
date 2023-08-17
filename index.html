@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
+<html style="background-color: white" id="bcolor"></html>
 
 <head>
     <meta charset="UTF-8">
@@ -16,16 +17,19 @@
     <script>
         let canvas = document.getElementById('mycanvas');
         let c = canvas.getContext('2d');
+        let color = document.getElementById("bcolor");
 
         let x,y,z = 0;
-        let bool = false;
+        let deviceX = 355;
 
         window.addEventListener("deviceorientation",deviceMotion);
 
         function run() {
             document.getElementById("t1").innerText = x;
-            document.getElementById("t2").innerText = y;
-            document.getElementById("t3").innerText = z;
+
+            if(x < deviceX+3 && x > deviceX-3){
+                color.style.backgroundColor="rgb(100,0,0)";
+            }
         }
 
         function deviceMotion(e) {
