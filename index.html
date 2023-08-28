@@ -30,8 +30,8 @@
         let second = 3;
         let count = -1;
         let istouch = false;
-        let deviceX = [];  //設定する角度
-        let sampleDeta = [];  //平均データ
+        let deviceX = [0];  //設定する角度
+        let sampleDeta = [0];  //平均データ
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart", touchstart);
