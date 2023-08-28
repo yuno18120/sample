@@ -26,7 +26,7 @@
         let c = canvas.getContext('2d');
         let color = document.getElementById("bcolor");
 
-        let X = 0; //devicemotionのデータを格納する変数
+        let x = 0; //devicemotionのデータを格納する変数
         let y = 0; //deviceXを決定するために使う変数
         let second = 3;
         let count = -1;
@@ -54,7 +54,7 @@
             } else if (count == 1) {
 
                 document.getElementById("t1").innerText = "デバイスを右回りに90度傾けてください";
-                document.getElementById("t2").innerText = "ちょうど90度であると思ったところで決定ボタンを3秒間長押ししてください";
+                document.getElementById("t2").innerText = "できれば決定ボタンを約3秒間長押ししてください";
 
             } else if (count == 2) {
 
@@ -75,8 +75,6 @@
 
             }
 
-
-
             if (count <= 2) {
                 c.beginPath();
                 c.rect(10, 10, 375, 200);
@@ -85,6 +83,7 @@
                 c.closePath();
 
                 document.getElementById("t3").innerText = x;
+                document.getElementById("t4").innerText = deviceX[0];
             }
         }
 
@@ -96,17 +95,19 @@
 
         function touchstart() {
             istouch = true;
-            if (count == -1) {
+            if(count ==-1){
                 count++;
-            } else if (count == 0 || count == 1 || count == 2) {
-                setInterval(timer, 1000);
-                if (second <= 0) {
-                    count++;
-                }
             }
         }
         function touchend() {
             istouch = false;
+            if(count < -1 && count >= 2){
+                count++;
+            }
+            for(let i=0; i<sampleDeta.length; i++){
+                y += sampleDeta[i];
+                deviceX.push(y/sampleDeta.length);
+            }
         }
 
         function deviceMotion() {
@@ -116,7 +117,7 @@
             }
         }
 
-        setInterval(run, 100);
+        setInterval(run, 10);
     </script>
 </body>
 
