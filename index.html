@@ -68,6 +68,7 @@
                     deviceX.push(y / sampleDeta.length);
                     sampleDeta[i] = 0;
                 }
+
             } else {
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
@@ -75,7 +76,7 @@
 
             document.getElementById("t3").innerText = x;
 
-            if (x < deviceX - 5 && x < deviceX +5) {
+            if (x < deviceX - 1 && x < deviceX + 1) {
                 color.style.backgroundColor = "rgb(255,0,0)";
             } else {
                 color.style.backgroundColor = "rgb(255,255,255)";
