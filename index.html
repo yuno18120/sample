@@ -99,7 +99,7 @@
             if (sampleDeta.length != 0) {
                 for (let i = 0; i < sampleDeta.length; i++) {
                     y += sampleDeta[i];
-                    deviceX.push(y / sampleDeta.length);
+
                 }
             }
         }
@@ -107,7 +107,11 @@
         function deviceMotion() {
             x = e.alpha;
             if (istouch) {
-                sampleDeta.push(istouch);
+                if (sampleDeta.length == 1) {
+                    sampleDeta[0] = x;
+                } else {
+                    sampleDeta[sampleDeta.length] = x;
+                }
             }
         }
 
