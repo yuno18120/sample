@@ -87,15 +87,10 @@
 
         function touchstart() {
             istouch = true;
-            if (count <= 0) {
-                count++;
-            }
         }
         function touchend() {
             istouch = false;
-            if (count > 0 && count <= 3) {
-                count++;
-            }
+            count++;
             if (sampleDeta.length != 0) {
                 for (let i = 0; i < sampleDeta.length; i++) {
                     y += sampleDeta[i];
@@ -106,12 +101,10 @@
 
         function deviceMotion() {
             x = e.alpha;
-            if (istouch) {
-                if (sampleDeta.length == 1) {
-                    sampleDeta[0] = x;
-                } else {
-                    sampleDeta[sampleDeta.length] = x;
-                }
+            if (sampleDeta.length == 1) {
+                sampleDeta[0] = x;
+            } else {
+                sampleDeta[sampleDeta.length] = x;
             }
         }
 
