@@ -26,7 +26,7 @@
         let c = canvas.getContext('2d');
         let color = document.getElementById("bcolor");
 
-        let x = 0; //devicemotionのデータを格納する変数
+        let X = 0; //devicemotionのデータを格納する変数
         let y = 0; //deviceXを決定するために使う変数
         let z = 0;
         let count = 0;
@@ -34,7 +34,7 @@
         let deviceX = [];  //設定する角度
         let sampleDeta = [];  //平均データ
 
-        window.addEventListener("deviceorientation", deviceMotion);
+        window.addEventListener("devicemotion", deviceMotion);
         canvas.addEventListener("touchstart", touchstart);
         //canvas.addEventListener("mouseenter", mousedown)//pcでデバックする時用　実際はコメントアウト
 
@@ -79,7 +79,7 @@
 
         function touchstart() {
             if (count == 1 || count == 2) {
-                sampleDeta.push(x);
+                sampleDeta.push(X);
                 for (let i = 0; i < sampleDeta.length; i++) {
                     y += sampleDeta[i];
                     deviceX.push(y / sampleDeta.length);
@@ -101,7 +101,7 @@
         }*/
 
         function deviceMotion(e) {
-            x = e.alpha;
+            X = e.rotationRate.x;
         }
 
         setInterval(run, 100);
