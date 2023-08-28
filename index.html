@@ -34,6 +34,7 @@
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart",touchstart);
+        canvas.addEventListener("mousedown",mousedown); //pcでデバックする時用　実際はコメントアウト
 
         function run() {
             //デバイスの初期設定
@@ -69,9 +70,9 @@
                 document.getElementById("t2").innerText = "";
             }
 
-            document.getElementById("t3").innerText = x;
+            document.getElementById("t3").innerText = deviceX;
 
-            if (x < deviceX - 1 && x < deviceX + 1) {
+            if (x < deviceX[0] - 1 && x < deviceX[0] + 1) {
                 color.style.backgroundColor = "rgb(255,0,0)";
             } else {
                 color.style.backgroundColor = "rgb(255,255,255)";
@@ -85,6 +86,10 @@
         }
 
         function touchstart(){
+            count++;
+            sampleDeta.push(x);
+        }
+        function mousedown(){  //pcでデバックする時用　実際はコメントアウト
             count++;
             sampleDeta.push(x);
         }
