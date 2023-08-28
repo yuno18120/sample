@@ -57,7 +57,7 @@
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
 
-                if (x > sampleDeta[1] - 3 && x < sampleDeta[1] + 3) {
+                if ((x > sampleDeta[1] - 3 && x < sampleDeta[1] + 3) && (y > sampleDeta[2] - 3 && y < sampleDeta[2] + 3) && (z > sampleDeta[3] - 3 && z < sampleDeta[3] + 3)) {
                     color.style.backgroundColor = "rgb(255,0,0)";
                 } else {
                     color.style.backgroundColor = "rgb(255,255,255)";
@@ -79,6 +79,7 @@
             }
 
             document.getElementById("t3").innerText = y;
+            document.getElementById("t4").innerText = z;
 
         }
 
@@ -105,6 +106,7 @@
         function deviceMotion(e) {
             x = e.alpha;
             y = e.gamma;
+            z = e.beta;
         }
 
         setInterval(run, 100);
