@@ -91,21 +91,16 @@
         function touchend() {
             istouch = false;
             count++;
-            if (sampleDeta.length != 0) {
+            /*if (sampleDeta.length != 0) {
                 for (let i = 0; i < sampleDeta.length; i++) {
                     y += sampleDeta[i];
 
                 }
-            }
+            }*/
         }
 
         function deviceMotion() {
             x = e.alpha;
-            if (sampleDeta.length == 1) {
-                sampleDeta[0] = x;
-            } else {
-                sampleDeta[sampleDeta.length] = x;
-            }
         }
 
         setInterval(run, 10);
