@@ -67,28 +67,11 @@
 
             }
 
-            if (count <= 2) {
-                c.beginPath();
-                c.rect(100, 100, 50, 50);
-                c.fillStyle = "black";
-                c.fill();
-                c.closePath();
-            }
+            document.getElementById("t3").innerText = X;
 
-            document.getElementById("t1").innerText = x;
-            document.getElementById("t3").innerText = sampleDeta;
-            document.getElementById("t4").innerText = deviceX;
         }
 
         function touchstart() {
-            if (count == 1 || count == 2) {
-                sampleDeta.push(X);
-                for (let i = 0; i < sampleDeta.length; i++) {
-                    y += sampleDeta[i];
-                    deviceX.push(y / sampleDeta.length);
-                    sampleDeta[i] = 0;
-                }
-            }
             count++;
         }
         /*function mousedown() {  //pcでデバックする時用　実際はコメントアウト
