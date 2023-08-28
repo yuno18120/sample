@@ -26,11 +26,9 @@
         let c = canvas.getContext('2d');
         let color = document.getElementById("bcolor");
 
-        let X = 0; //devicemotionのデータを格納する変数
+        let x = 0; //devicemotionのデータを格納する変数
         let y = 0; //deviceXを決定するために使う変数
-        let z = 0;
         let count = 0;
-        let second = 0;
         let deviceX = [];  //設定する角度
         let sampleDeta = [];  //平均データ
 
@@ -59,20 +57,32 @@
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
 
-                if (x > deviceX[0] - 3 && x < deviceX[0] + 3) {
+                if (x > sampleDeta[0] - 3 && x < sampleDeta[0] + 3) {
                     color.style.backgroundColor = "rgb(255,0,0)";
+                }else if(x > sampleDeta[1]-3 && x < sampleDeta[1] + 3){
+                    color.style.backgroundColor = "rgb(0,0,255)";
                 } else {
                     color.style.backgroundColor = "rgb(255,255,255)";
                 }
-
             }
 
-            document.getElementById("t3").innerText = X;
+            if(count >= 0 && count <= 2){
+                c.beginPath();
+                c.rect(10,10,375,200);
+                c.fillStyle="rgb(0,0,0)";
+                c.fill();
+                c.closePath();
+            }
+
+            document.getElementById("t3").innerText = x;
 
         }
 
         function touchstart() {
             count++;
+            if (count == 1 || count == 2) {
+                sampleDeta.push(x);
+            }
         }
         /*function mousedown() {  //pcでデバックする時用　実際はコメントアウト
             if (count == 1 || count == 2) {
@@ -87,7 +97,7 @@
         }*/
 
         function deviceMotion(e) {
-            X = e.alpha;
+            x = e.alpha;
         }
 
         setInterval(run, 100);
