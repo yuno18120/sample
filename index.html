@@ -28,19 +28,25 @@
 
         let X = 0; //devicemotionのデータを格納する変数
         let y = 0; //deviceXを決定するために使う変数
-        let z = 0;
-        let count = 0;
-        let second = 0;
+        let second = 3;
+        let count = -1;
+        let istouch = false;
         let deviceX = [];  //設定する角度
         let sampleDeta = [];  //平均データ
 
-        window.addEventListener("devicemotion", deviceMotion);
+        window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart", touchstart);
+        canvas.addEventListener("touchend", touchend);
         //canvas.addEventListener("mouseenter", mousedown)//pcでデバックする時用　実際はコメントアウト
 
         function run() {
             //デバイスの初期設定
-            if (count == 0) {
+            if (count == -1) {
+
+                document.getElementById("t1").innerText = "設定を始めます 指示に従ってください";
+                document.getElementById("t2").innerText = "決定ボタンを押している時は動かさないようにしてください";
+
+            } else if (count == 0) {
 
                 document.getElementById("t1").innerText = "デバイスをあなたの持ちやすいようにお持ちください";
                 document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
@@ -48,7 +54,7 @@
             } else if (count == 1) {
 
                 document.getElementById("t1").innerText = "デバイスを右回りに90度傾けてください";
-                document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
+                document.getElementById("t2").innerText = "ちょうど90度であると思ったところで決定ボタンを3秒間長押ししてください";
 
             } else if (count == 2) {
 
@@ -58,50 +64,46 @@
             } else {
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
+
+                //90度のところで画面を赤くする
+
+                if (x > deviceX[0] - 3 && x < deviceX[0] + 3) {
+                    color.style.backgroundColor = "rgb(255,0,0)";
+                } else {
+                    color.style.backgroundColor = "rgb(255,255,255)";
+                }
+
             }
 
-            document.getElementById("t1").innerText = x;
-            document.getElementById("t3").innerText = sampleDeta;
-            document.getElementById("t4").innerText = deviceX;
+            if (count <= 2) {
+                c.beginPath();
+                c.rect(10, 10, 375, 200);
+                c.fillStyle = "black";
+                c.fill();
+                c.closePath();
 
-            if (x > deviceX[0] - 3 && x < deviceX[0] + 3) {
-                color.style.backgroundColor = "rgb(255,0,0)";
-            } else {
-                color.style.backgroundColor = "rgb(255,255,255)";
+                document.getElementById("t3").innerText = x;
             }
+        }
 
-            c.beginPath();
-            c.rect(100, 100, 50, 50);
-            c.fillStyle = "black";
-            c.fill();
-            c.closePath();
+        function timer() {
+            if (second >= 0) {
+                second--;
+            }
         }
 
         function touchstart() {
-            if (count == 1 || count == 2) {
-                sampleDeta.push(X);
-                for (let i = 0; i < sampleDeta.length; i++) {
-                    y += sampleDeta[i];
-                    deviceX.push(y / sampleDeta.length);
-                    sampleDeta[i] = 0;
-                }
-            }
-            count++;
+            istouch = true;
         }
-        /*function mousedown() {  //pcでデバックする時用　実際はコメントアウト
-            if (count == 1 || count == 2) {
-                sampleDeta.push(x);
-                for (let i = 0; i < sampleDeta.length; i++) {
-                    y += sampleDeta[i];
-                    deviceX.push(y / sampleDeta.length);
-                    sampleDeta[i] = 0;
-                }
-            }
-            count++;
-        }*/
+        function touchend() {
+            istouch = false;
+        }
 
-        function deviceMotion(e) {
-            X = e.rotationRate.x;
+        function deviceMotion() {
+            x = e.alpha;
+            if(istouch){
+                sampleDeta.push(x);
+            }
         }
 
         setInterval(run, 100);
