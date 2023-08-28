@@ -81,7 +81,7 @@
                 c.fill();
                 c.closePath();
 
-                document.getElementById("t3").innerText = istouch;
+                document.getElementById("t3").innerText = sampleDeta;
             }
         }
 
@@ -107,7 +107,7 @@
         function deviceMotion() {
             x = e.alpha;
             if (istouch) {
-                sampleDeta.push(x);
+                sampleDeta.push(istouch);
             }
         }
 
