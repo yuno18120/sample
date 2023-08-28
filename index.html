@@ -34,7 +34,7 @@
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart",touchstart);
-        canvas.addEventListener("mousedown",mousedown); //pcでデバックする時用　実際はコメントアウト
+        //canvas.addEventListener("mousedown",mousedown); //pcでデバックする時用　実際はコメントアウト
 
         function run() {
             //デバイスの初期設定
@@ -89,10 +89,10 @@
             count++;
             sampleDeta.push(x);
         }
-        function mousedown(){  //pcでデバックする時用　実際はコメントアウト
+        /*function mousedown(){  //pcでデバックする時用　実際はコメントアウト
             count++;
             sampleDeta.push(x);
-        }
+        }*/
 
         function deviceMotion(e) {
             x = e.alpha;
