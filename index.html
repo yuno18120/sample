@@ -34,7 +34,6 @@
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart",touchstart);
-        canvas.addEventListener("mousedown",mousedown);
 
         function run() {
             //デバイスの初期設定
@@ -91,10 +90,6 @@
 
         function touchstart(){
             count++;
-        }
-        function mousedown(){
-            count++;
-            alert("ボタン");
         }
 
         function deviceMotion(e) {
