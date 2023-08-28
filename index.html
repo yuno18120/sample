@@ -17,7 +17,6 @@
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
     <h1 id="t3"></h1>
-    <h1 id="t4"></h1>
     <canvas width="375" height="375" id="mycanvas"></canvas>
 
     <script>
@@ -82,26 +81,19 @@
                 c.fill();
                 c.closePath();
 
-                document.getElementById("t3").innerText = count;
-                document.getElementById("t4").innerText = sampleDeta;
-            }
-        }
-
-        function timer() {
-            if (second >= 0) {
-                second--;
+                document.getElementById("t3").innerText = sampleDeta[0];
             }
         }
 
         function touchstart() {
             istouch = true;
-            if (count == -1) {
+            if (count >= 0) {
                 count++;
             }
         }
         function touchend() {
             istouch = false;
-            if (count > -1 && count <= 3) {
+            if (count > 0 && count <= 3) {
                 count++;
             }
             if (sampleDeta.length != 0) {
