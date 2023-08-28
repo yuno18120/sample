@@ -95,18 +95,20 @@
 
         function touchstart() {
             istouch = true;
-            if(count ==-1){
+            if (count == -1) {
                 count++;
             }
         }
         function touchend() {
             istouch = false;
-            if(count < -1 && count >= 2){
+            if (count > -1 && count <= 2) {
                 count++;
             }
-            for(let i=0; i<sampleDeta.length; i++){
-                y += sampleDeta[i];
-                deviceX.push(y/sampleDeta.length);
+            if (sampleDeta.length != 0) {
+                for (let i = 0; i < sampleDeta.length; i++) {
+                    y += sampleDeta[i];
+                    deviceX.push(y / sampleDeta.length);
+                }
             }
         }
 
