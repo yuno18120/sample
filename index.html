@@ -17,6 +17,7 @@
     <h1 id="t1"></h1>
     <h1 id="t2"></h1>
     <h1 id="t3"></h1>
+    <h1 id="t4"></h1>
     <canvas width="375" height="375" id="mycanvas"></canvas>
 
     <script>
@@ -35,7 +36,7 @@
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart", touchstart);
-        //canvas.addEventListener("mousedown",mousedown); //pcでデバックする時用　実際はコメントアウト
+        //canvas.addEventListener("mouseenter", mousedown)//pcでデバックする時用　実際はコメントアウト
 
         function run() {
             //デバイスの初期設定
@@ -49,40 +50,18 @@
                 document.getElementById("t1").innerText = "デバイスを右回りに90度傾けてください";
                 document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
 
-                if (z = 0) {
-
-                    for (let i = 0; i < sampleDeta.length; i++) {
-                        y += sampleDeta[i];
-                        deviceX.push(y / sampleDeta.length);
-                        sampleDeta[i] = 0;
-                    }
-
-                    z++;
-
-                }
-
             } else if (count == 2) {
 
                 document.getElementById("t1").innerText = "デバイスを元の位置に戻した後、左回りで90度傾けてください";
                 document.getElementById("t2").innerText = "お持ちになれば決定ボタンを押してください";
-
-                if (z == 1) {
-
-                    for (let i = 0; u < sampleDeta.length; i++) {
-                        y += sampleDeta[i];
-                        deviceX.push(y / sampleDeta.length);
-                        sampleDeta[i] = 0;
-                    }
-
-                    z++;
-                }
 
             } else {
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
             }
 
-            document.getElementById("t3").innerText = deviceX;
+            document.getElementById("t3").innerText = sampleDeta;
+            document.getElementById("t4").innerText = deviceX;
 
             if (x < deviceX[0] - 1 && x < deviceX[0] + 1) {
                 color.style.backgroundColor = "rgb(255,0,0)";
@@ -98,14 +77,26 @@
         }
 
         function touchstart() {
-            count++;
             if (count == 1 || count == 2) {
                 sampleDeta.push(x);
+                for (let i = 0; i < sampleDeta.length; i++) {
+                    y += sampleDeta[i];
+                    deviceX.push(y / sampleDeta.length);
+                    sampleDeta[i] = 0;
+                }
             }
-        }
-        /*function mousedown(){  //pcでデバックする時用　実際はコメントアウト
             count++;
-            sampleDeta.push(x);
+        }
+        /*function mousedown() {  //pcでデバックする時用　実際はコメントアウト
+            if (count == 1 || count == 2) {
+                sampleDeta.push(x);
+                for (let i = 0; i < sampleDeta.length; i++) {
+                    y += sampleDeta[i];
+                    deviceX.push(y / sampleDeta.length);
+                    sampleDeta[i] = 0;
+                }
+            }
+            count++;
         }*/
 
         function deviceMotion(e) {
