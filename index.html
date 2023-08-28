@@ -75,6 +75,8 @@
 
             }
 
+
+
             if (count <= 2) {
                 c.beginPath();
                 c.rect(10, 10, 375, 200);
@@ -94,6 +96,14 @@
 
         function touchstart() {
             istouch = true;
+            if (count == -1) {
+                count++;
+            } else if (count == 0 || count == 1 || count == 2) {
+                setInterval(timer, 1000);
+                if (second <= 0) {
+                    count++;
+                }
+            }
         }
         function touchend() {
             istouch = false;
@@ -101,7 +111,7 @@
 
         function deviceMotion() {
             x = e.alpha;
-            if(istouch){
+            if (istouch) {
                 sampleDeta.push(x);
             }
         }
