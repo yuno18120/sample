@@ -64,9 +64,10 @@
                 if(y > sampleDeta[1] - 5 && y < sampleDeta[1] + 5){
                     if (x > sampleDeta[0] - 3 && x < sampleDeta[0] + 3) {
                         color.style.backgroundColor = "rgb(255,0,0)";
-                        c.fillStyle = "rgb(255,0,0)";
+                        canvas.backgroundColor = "red";
                     }
-                } else if(y < sampleDeta[1] - 10 && y > sampleDeta[1] + 10) {
+                }
+                if(y < sampleDeta[1] - 10 && y > sampleDeta[1] + 10) {
                     if(x < sampleDeta[0] - 10 && x > sampleDeta[0] + 10)
                     color.style.backgroundColor = "rgb(255,255,255)";
                 }
