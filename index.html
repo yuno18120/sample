@@ -86,15 +86,17 @@
             document.getElementById("t3").innerText = z;
             document.getElementById("t4").innerText = sampleDeta[1];
             document.getElementById("t5").innerText = sampleDeta[2];
-            document.getElementById("t6").innerText = sampleDeta[3];
+            document.getElementById("t6").innerText = sampleDeta.length;
 
         }
 
         function touchstart() {
             if (count >= 0 && count <= 2) {
                 count++;
-                if (count == 1 || count == 2) {
+                if (count == 1) {
                     sampleDeta.push(x);
+                    sampleDeta.push(y);
+                    sampleDeta.push(z);
                 }
             }
         }
