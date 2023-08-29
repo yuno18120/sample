@@ -61,7 +61,7 @@
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
 
-                if ((x > sampleDeta[1] - 3 && x < sampleDeta[1] + 3) /*&& (y > sampleDeta[2] - 3 && y < sampleDeta[2] + 3) && (z > sampleDeta[3] - 3 && z < sampleDeta[3] + 3)*/) {
+                if ((x > sampleDeta[0] - 3 && x < sampleDeta[0] + 3) /*&& (y > sampleDeta[1] - 3 && y < sampleDeta[1] + 3) && (z > sampleDeta[2] - 3 && z < sampleDeta[2] + 3)*/) {
                     color.style.backgroundColor = "rgb(255,0,0)";
                 } else {
                     color.style.backgroundColor = "rgb(255,255,255)";
@@ -84,7 +84,8 @@
 
             document.getElementById("t1").innerText = count;
             document.getElementById("t2").innerText = sampleDeta[0];
-            document.getElementById("t3").innerText = x;
+            document.getElementById("t3").innerText = sampleDeta[1];
+            document.getElementById("t4").innerText = sampleDeta[2];
         }
 
         function touchstart() {
