@@ -96,7 +96,6 @@
                 if (count == 2) {
                     sampleDeta.push(x);
                     sampleDeta.push(y);
-                    sampleDeta.push(z);
                 }
             }
         }
@@ -115,7 +114,6 @@
         function deviceMotion(e) {
             x = e.alpha;
             y = e.gamma;
-            z = e.beta;
         }
 
         setInterval(run, 100);
