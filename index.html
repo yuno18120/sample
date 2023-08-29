@@ -31,10 +31,9 @@
         let color = document.getElementById("bcolor");
 
         let x = 0; //devicemotionのデータを格納する変数
-        let y = 0; //deviceXを決定するために使う変数
-        let count = 0;
-        let deviceX = [];  //設定する角度
-        let sampleDeta = [];  //平均データ
+        let y = 80; //deviceXを決定するために使う変数
+        let count = 3;
+        let sampleDeta = [0, 80];  //平均データ
 
         window.addEventListener("deviceorientation", deviceMotion);
         canvas.addEventListener("touchstart", touchstart);
@@ -61,22 +60,25 @@
                 document.getElementById("t1").innerText = "";
                 document.getElementById("t2").innerText = "";
 
-                if(y > sampleDeta[1] - 5 && y < sampleDeta[1] + 5){
+                if (y > sampleDeta[1] - 5 && y < sampleDeta[1] + 5) {
                     if (x > sampleDeta[0] - 3 && x < sampleDeta[0] + 3) {
-                        color.style.backgroundColor = "rgb(255,0,0)";
-                        canvas.backgroundColor = "red";
+                        color.style.backgroundColor = "rgb(255,55,40)";
+                        c.beginPath();
+                        c.rect(10, 10, 375, 200);
+                        c.fillStyle = "rgb(255,55,40)";
+                        c.fill();
+                        c.closePath();
+                    }
+                } else if (y > sampleDeta[1] + 10 || y < sampleDeta[1] - 10) {
+                    if (x > sampleDeta[0] + 5 || x < sampleDeta[0] - 5) {
+                        color.style.backgroundColor = "rgb(255,255,255)";
+                        c.beginPath();
+                        c.rect(10, 10, 375, 200);
+                        c.fillStyle = "rgb(255,255,255)";
+                        c.fill();
+                        c.closePath();
                     }
                 }
-                if(y < sampleDeta[1] - 10 && y > sampleDeta[1] + 10) {
-                    if(x < sampleDeta[0] - 10 && x > sampleDeta[0] + 10)
-                    color.style.backgroundColor = "rgb(255,255,255)";
-                }
-
-                c.beginPath();
-                c.rect(10, 10, 375, 200);
-                c.fillStyle = "rgb(255,255,255)";
-                c.fill();
-                c.closePath();
             }
 
             if (count >= 0 && count <= 2) {
@@ -92,8 +94,8 @@
             if (count >= 0 && count <= 2) {
                 count++;
                 if (count == 2) {
-                    sampleDeta.push(x);
-                    sampleDeta.push(y);
+                    //sampleDeta.push(x);
+                    //sampleDeta.push(y);
                 }
             }
         }
